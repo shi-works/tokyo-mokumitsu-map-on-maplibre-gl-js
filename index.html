@@ -205,17 +205,18 @@
             });
 
             // 木密地域ポリゴンソース
-            map.addSource('mokumitsu', {
-                type: 'geojson',
-                data: './r2ka13_with_mokumitsu.geojson',
-                attribution: '<a href="https://www.toshiseibi.metro.tokyo.lg.jp/bosai/visual.htm" target="_blank">東京都 令和2年木造住宅密集地域 町丁目一覧（</a>'
+            map.addSource('pmtiles-mokumitsu', {
+                type: "vector",
+                url: "pmtiles://" + "https://xs489works.xsrv.jp/pmtiles-data/tokyo-digitaltwin/r2ka13_with_mokumitsu.pmtiles",
+                attribution: '<a href="https://www.toshiseibi.metro.tokyo.lg.jp/bosai/visual.htm" target="_blank">東京都 令和2年木造住宅密集地域 町丁目一覧及び2020年国勢調査（</a>'
             });
 
             // 木密地域ポリゴンレイヤ
             map.addLayer({
                 id: 'mokumitsu-fill',
                 type: 'fill',
-                source: 'mokumitsu',
+                source: 'pmtiles-mokumitsu',
+                'source-layer': "r2ka13_with_mokumitsu",
                 layout: {},
                 paint: {
                     "fill-color": "#FF0000",  // mokumitsuが1の場合は赤色
@@ -228,7 +229,8 @@
             map.addLayer({
                 id: 'mokumitsu-line',
                 type: 'line',
-                source: 'mokumitsu',
+                source: 'pmtiles-mokumitsu',
+                'source-layer': "r2ka13_with_mokumitsu",
                 layout: {},
                 paint: {
                     "line-color": "#FFFFFF",  // 明るい色
@@ -398,7 +400,8 @@
             map.addLayer({
                 'id': 'mokumitsu-label',
                 'type': 'symbol',
-                'source': 'mokumitsu',
+                source: 'pmtiles-mokumitsu',
+                'source-layer': "r2ka13_with_mokumitsu",
                 "minzoom": 14,
                 "maxzoom": 18,
                 'layout': {
